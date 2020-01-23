@@ -12,11 +12,14 @@ public class BackgroundThreadManager {
     private ExecutorService executorService;
     private Future<?> submittedThread;
 
+    private BackgroundThread backgroundThread;
+
+    public BackgroundThreadManager(BackgroundThread backgroundThread) {
+        this.backgroundThread = backgroundThread;
+    }
 
     @PostConstruct
     private void runThread() {
-        BackgroundThread backgroundThread = new BackgroundThread();
-
         executorService = Executors.newSingleThreadExecutor();
         submittedThread = executorService.submit(backgroundThread);
     }
